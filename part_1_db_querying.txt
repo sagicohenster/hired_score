@@ -1,0 +1,89 @@
+1.Team names that have “FED” or “FS” positions available
+  
+db.collection.find({
+"$or":[
+{
+positions: "FED"
+},
+ {
+positions: "FS"
+}
+]
+},
+{
+team: 1,
+ _id: 0
+})
+ 
+[
+{
+"team": "Ninjas"
+},
+ {
+"team": "GreatOnes"
+},
+ {
+"team": "Fighters"
+},
+ {
+"team": "LeaveIt2us"
+}
+]
+
+
+
+
+
+2.Team names that require at least 3 years of experience
+ 
+db.collection.find({
+years_min: {
+"$gte": 3
+}
+},
+{
+team: 1,
+ _id: 0
+})
+ 
+[
+{
+"team": "GreatOnes"
+},
+ {
+"team": "Fighters"
+},
+ {
+"team": "CanDoers"
+}
+]
+
+
+
+
+
+3.Team names that have at least 3 positions
+
+db.collection.find({
+$expr: {
+$gte: [
+{
+$size: "$positions"
+},
+ 3
+]
+}
+},
+{
+team: 1,
+ _id: 0
+})
+ 
+[
+{
+"team": "Fighters"
+},
+ {
+"team": "CanDoers"
+}
+]
